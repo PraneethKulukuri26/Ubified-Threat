@@ -1,0 +1,62 @@
+# Unified Threat Intelligence & SIEM Fusion - Configuration
+# =========================================================
+
+feeds:
+  # TAXII 2.0/2.1 server URLs (set to your own instances)
+  taxii_servers: []
+    # - url: "https://taxii.example.com/taxii2/"
+    #   collection_id: "example-collection-id"
+    #   use_https: true
+    #   username: ""
+    #   password: ""
+
+  # Local STIX bundle files
+  local_stix:
+    - "sample_data/stix_bundle.json"
+
+  # OSINT CSV/JSON feeds
+  osint_feeds:
+    - "sample_data/osint_feed.csv"
+
+siem:
+  # Path to SIEM log CSV files
+  log_files:
+    - "sample_data/siem_logs.csv"
+
+  # Column mapping (maps your CSV columns to expected fields)
+  column_mapping:
+    timestamp: "timestamp"
+    src_ip: "src_ip"
+    dst_ip: "dst_ip"
+    domain: "domain"
+    url: "url"
+    hash: "hash"
+    event_type: "event_type"
+    severity: "severity"
+
+scoring:
+  weights:
+    recency: 0.4
+    actor_severity: 0.3
+    sightings: 0.3
+  severity_levels:
+    critical: 0.9
+    high: 0.7
+    medium: 0.5
+    low: 0.3
+
+llm:
+  provider: "groq"          # "groq" or "none"
+  model: "llama-3.3-70b-versatile"
+  # API key via env var: GROQ_API_KEY
+  max_tokens: 2048
+
+output:
+  directory: "outputs"
+  formats:
+    - "json"
+    - "csv"
+  graph_format: "png"       # "png" or "html"
+
+storage:
+  database: "threat_intel.db"

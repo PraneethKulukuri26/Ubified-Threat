@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  threat-fusion:
+    build: .
+    container_name: threat-intel-fusion
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY:-}
+    volumes:
+      - ./outputs:/app/outputs
+      - ./sample_data:/app/sample_data
+      - ./config.yaml:/app/config.yaml
+    command: ["--config", "config.yaml", "--output", "outputs/"]

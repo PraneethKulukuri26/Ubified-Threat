@@ -1,0 +1,459 @@
+{
+    "type": "bundle",
+    "id": "bundle--a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "spec_version": "2.1",
+    "created": "2025-01-15T10:00:00.000Z",
+    "modified": "2025-01-15T10:00:00.000Z",
+    "objects": [
+        {
+            "type": "threat-actor",
+            "id": "threat-actor--1a2b3c4d-5e6f-7890-abcd-111111111111",
+            "spec_version": "2.1",
+            "created": "2025-01-10T08:00:00.000Z",
+            "modified": "2025-01-10T08:00:00.000Z",
+            "name": "APT-PHANTOM",
+            "description": "Advanced persistent threat group targeting financial institutions with custom malware.",
+            "threat_actor_types": [
+                "crime-syndicate"
+            ],
+            "aliases": [
+                "Phantom Spider",
+                "FIN-PHANTOM"
+            ],
+            "roles": [
+                "agent"
+            ],
+            "sophistication": "expert",
+            "resource_level": "organization",
+            "primary_motivation": "personal-gain"
+        },
+        {
+            "type": "threat-actor",
+            "id": "threat-actor--2b3c4d5e-6f70-8901-bcde-222222222222",
+            "spec_version": "2.1",
+            "created": "2025-01-12T09:00:00.000Z",
+            "modified": "2025-01-12T09:00:00.000Z",
+            "name": "DARKSTORM",
+            "description": "State-sponsored group focusing on critical infrastructure and energy sector espionage.",
+            "threat_actor_types": [
+                "nation-state"
+            ],
+            "aliases": [
+                "Storm Bear",
+                "ENERGETIC-BEAR"
+            ],
+            "roles": [
+                "director"
+            ],
+            "sophistication": "expert",
+            "resource_level": "government",
+            "primary_motivation": "dominance"
+        },
+        {
+            "type": "threat-actor",
+            "id": "threat-actor--3c4d5e6f-7081-9012-cdef-333333333333",
+            "spec_version": "2.1",
+            "created": "2025-01-14T07:00:00.000Z",
+            "modified": "2025-01-14T07:00:00.000Z",
+            "name": "CRYPTOLOCH",
+            "description": "Ransomware-as-a-service operator distributing crypto-locking malware.",
+            "threat_actor_types": [
+                "criminal"
+            ],
+            "aliases": [
+                "Loch Gang"
+            ],
+            "roles": [
+                "infrastructure-operator"
+            ],
+            "sophistication": "advanced",
+            "resource_level": "organization",
+            "primary_motivation": "personal-gain"
+        },
+        {
+            "type": "malware",
+            "id": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0001",
+            "spec_version": "2.1",
+            "created": "2025-01-10T08:30:00.000Z",
+            "modified": "2025-01-10T08:30:00.000Z",
+            "name": "PhantomRAT",
+            "description": "Custom remote access trojan used by APT-PHANTOM for C2 communications.",
+            "malware_types": [
+                "remote-access-trojan"
+            ],
+            "is_family": true
+        },
+        {
+            "type": "malware",
+            "id": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0002",
+            "spec_version": "2.1",
+            "created": "2025-01-12T09:30:00.000Z",
+            "modified": "2025-01-12T09:30:00.000Z",
+            "name": "StormWiper",
+            "description": "Destructive wiper malware deployed in DARKSTORM campaigns against energy infrastructure.",
+            "malware_types": [
+                "wiper"
+            ],
+            "is_family": false
+        },
+        {
+            "type": "malware",
+            "id": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0003",
+            "spec_version": "2.1",
+            "created": "2025-01-14T07:30:00.000Z",
+            "modified": "2025-01-14T07:30:00.000Z",
+            "name": "CryptoLoch Ransomware",
+            "description": "Ransomware that encrypts files and demands cryptocurrency payments.",
+            "malware_types": [
+                "ransomware"
+            ],
+            "is_family": true
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000001",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "name": "Malicious C2 IP - APT-PHANTOM",
+            "description": "Command and control server for PhantomRAT",
+            "pattern": "[ipv4-addr:value = '185.220.101.34']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-10T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "c2-server"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000002",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "name": "PhantomRAT C2 Domain",
+            "description": "Domain used for PhantomRAT command and control",
+            "pattern": "[domain-name:value = 'phantom-update.evil.com']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-10T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "c2-domain"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000003",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "name": "PhantomRAT Binary Hash",
+            "description": "SHA256 hash of PhantomRAT dropper",
+            "pattern": "[file:hashes.'SHA-256' = 'a1b2c3d4e5f67890abcdef1234567890abcdef1234567890abcdef1234567890']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-10T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "malware-hash"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000004",
+            "spec_version": "2.1",
+            "created": "2025-01-13T10:00:00.000Z",
+            "modified": "2025-01-13T10:00:00.000Z",
+            "name": "DARKSTORM Staging Server",
+            "description": "Staging server for StormWiper deployment",
+            "pattern": "[ipv4-addr:value = '91.234.56.78']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-12T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "staging-server"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000005",
+            "spec_version": "2.1",
+            "created": "2025-01-13T10:00:00.000Z",
+            "modified": "2025-01-13T10:00:00.000Z",
+            "name": "DARKSTORM C2 Domain",
+            "description": "Command and control domain for DARKSTORM operations",
+            "pattern": "[domain-name:value = 'storm-ctrl.darknet.io']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-12T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "c2-domain"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000006",
+            "spec_version": "2.1",
+            "created": "2025-01-14T12:00:00.000Z",
+            "modified": "2025-01-14T12:00:00.000Z",
+            "name": "StormWiper Hash",
+            "description": "SHA256 hash of StormWiper payload",
+            "pattern": "[file:hashes.'SHA-256' = 'deadbeef1234567890abcdef1234567890abcdef1234567890abcdef12345678']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-12T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "malware-hash"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000007",
+            "spec_version": "2.1",
+            "created": "2025-01-14T14:00:00.000Z",
+            "modified": "2025-01-14T14:00:00.000Z",
+            "name": "CryptoLoch Payment Server",
+            "description": "Ransomware payment and key distribution server",
+            "pattern": "[ipv4-addr:value = '45.153.203.12']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-14T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "payment-server"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000008",
+            "spec_version": "2.1",
+            "created": "2025-01-14T14:00:00.000Z",
+            "modified": "2025-01-14T14:00:00.000Z",
+            "name": "CryptoLoch C2 Domain",
+            "description": "Ransomware C2 and exfiltration domain",
+            "pattern": "[domain-name:value = 'cryptoloch-pay.onion.ws']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-14T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "c2-domain"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000009",
+            "spec_version": "2.1",
+            "created": "2025-01-15T08:00:00.000Z",
+            "modified": "2025-01-15T08:00:00.000Z",
+            "name": "CryptoLoch Ransomware Hash",
+            "description": "SHA256 hash of CryptoLoch ransomware binary",
+            "pattern": "[file:hashes.'SHA-256' = 'cafebabe0000111122223333444455556666777788889999aaaabbbbccccdddd']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-14T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "malware-hash"
+            ]
+        },
+        {
+            "type": "indicator",
+            "id": "indicator--ind00001-0001-0001-0001-000000000010",
+            "spec_version": "2.1",
+            "created": "2025-01-15T09:00:00.000Z",
+            "modified": "2025-01-15T09:00:00.000Z",
+            "name": "APT-PHANTOM Exfil Server",
+            "description": "Data exfiltration server used by APT-PHANTOM",
+            "pattern": "[ipv4-addr:value = '103.75.201.45']",
+            "pattern_type": "stix",
+            "valid_from": "2025-01-10T00:00:00Z",
+            "indicator_types": [
+                "malicious-activity"
+            ],
+            "labels": [
+                "exfil-server"
+            ]
+        },
+        {
+            "type": "attack-pattern",
+            "id": "attack-pattern--ttp00001-0001-0001-0001-000000000001",
+            "spec_version": "2.1",
+            "created": "2025-01-10T08:00:00.000Z",
+            "modified": "2025-01-10T08:00:00.000Z",
+            "name": "Spearphishing Attachment",
+            "description": "Initial access via spearphishing emails with malicious attachments",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "external_id": "T1566.001"
+                }
+            ]
+        },
+        {
+            "type": "attack-pattern",
+            "id": "attack-pattern--ttp00001-0001-0001-0001-000000000002",
+            "spec_version": "2.1",
+            "created": "2025-01-12T09:00:00.000Z",
+            "modified": "2025-01-12T09:00:00.000Z",
+            "name": "Command and Scripting Interpreter",
+            "description": "Execution via PowerShell and command-line scripting",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "external_id": "T1059"
+                }
+            ]
+        },
+        {
+            "type": "attack-pattern",
+            "id": "attack-pattern--ttp00001-0001-0001-0001-000000000003",
+            "spec_version": "2.1",
+            "created": "2025-01-14T07:00:00.000Z",
+            "modified": "2025-01-14T07:00:00.000Z",
+            "name": "Data Encrypted for Impact",
+            "description": "Ransomware encryption of victim data for extortion",
+            "external_references": [
+                {
+                    "source_name": "mitre-attack",
+                    "external_id": "T1486"
+                }
+            ]
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000001",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "uses",
+            "source_ref": "threat-actor--1a2b3c4d-5e6f-7890-abcd-111111111111",
+            "target_ref": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0001",
+            "description": "APT-PHANTOM uses PhantomRAT"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000002",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--ind00001-0001-0001-0001-000000000001",
+            "target_ref": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0001",
+            "description": "IP 185.220.101.34 indicates PhantomRAT C2"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000003",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--ind00001-0001-0001-0001-000000000002",
+            "target_ref": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0001",
+            "description": "Domain phantom-update.evil.com indicates PhantomRAT C2"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000004",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "uses",
+            "source_ref": "threat-actor--1a2b3c4d-5e6f-7890-abcd-111111111111",
+            "target_ref": "attack-pattern--ttp00001-0001-0001-0001-000000000001",
+            "description": "APT-PHANTOM uses Spearphishing Attachment"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000005",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "uses",
+            "source_ref": "threat-actor--2b3c4d5e-6f70-8901-bcde-222222222222",
+            "target_ref": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0002",
+            "description": "DARKSTORM uses StormWiper"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000006",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--ind00001-0001-0001-0001-000000000004",
+            "target_ref": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0002",
+            "description": "IP 91.234.56.78 indicates StormWiper staging"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000007",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "uses",
+            "source_ref": "threat-actor--2b3c4d5e-6f70-8901-bcde-222222222222",
+            "target_ref": "attack-pattern--ttp00001-0001-0001-0001-000000000002",
+            "description": "DARKSTORM uses Command and Scripting Interpreter"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000008",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "uses",
+            "source_ref": "threat-actor--3c4d5e6f-7081-9012-cdef-333333333333",
+            "target_ref": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0003",
+            "description": "CRYPTOLOCH uses CryptoLoch Ransomware"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000009",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--ind00001-0001-0001-0001-000000000007",
+            "target_ref": "malware--aaa11111-bbbb-cccc-dddd-eeeeeeee0003",
+            "description": "IP 45.153.203.12 indicates CryptoLoch payment server"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000010",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "uses",
+            "source_ref": "threat-actor--3c4d5e6f-7081-9012-cdef-333333333333",
+            "target_ref": "attack-pattern--ttp00001-0001-0001-0001-000000000003",
+            "description": "CRYPTOLOCH uses Data Encrypted for Impact"
+        },
+        {
+            "type": "relationship",
+            "id": "relationship--rel00001-0001-0001-0001-000000000011",
+            "spec_version": "2.1",
+            "created": "2025-01-15T10:00:00.000Z",
+            "modified": "2025-01-15T10:00:00.000Z",
+            "relationship_type": "indicates",
+            "source_ref": "indicator--ind00001-0001-0001-0001-000000000010",
+            "target_ref": "threat-actor--1a2b3c4d-5e6f-7890-abcd-111111111111",
+            "description": "IP 103.75.201.45 indicates APT-PHANTOM exfiltration"
+        }
+    ]
+}
