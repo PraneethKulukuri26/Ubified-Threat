@@ -7,3 +7,4 @@ matplotlib>=3.7.0
 groq>=0.4.0
 pyyaml>=6.0
 kaleido>=0.2.1
+fpdf2>=0.2.1

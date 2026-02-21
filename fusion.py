@@ -27,6 +27,7 @@ from threat_intel.graph_builder import build_threat_graph, export_graph_png, exp
 from threat_intel.llm_summarizer import generate_summary, save_summary
 from threat_intel.query_generator import generate_all_queries, save_queries
 from threat_intel.storage import IOCDatabase, export_json, export_csv, export_enriched_alerts
+from threat_intel.pdf_report import generate_pdf_report
 
 
 # ── Logging Setup ────────────────────────────────────────────────────────
@@ -83,6 +84,8 @@ Examples:
                         help='Skip LLM summarization (use template)')
     parser.add_argument('--no-queries', action='store_true',
                         help='Skip query generation')
+    parser.add_argument('--no-pdf', action='store_true',
+                        help='Skip PDF report generation')
 
     return parser.parse_args()
 
@@ -213,6 +216,21 @@ def main():
     summary_path = os.path.join(output_dir, 'threat_summary.md')
     save_summary(summary, summary_path)
     print(f"   [+] Summary saved: {summary_path}")
+
+    # ── Step 5b: PDF Report ──────────────────────────────────────────
+    if not args.no_pdf:
+        print("\n[*] Generating PDF report...")
+        graph_png = os.path.join(output_dir, 'attacker_graph.png')
+        pdf_path = os.path.join(output_dir, 'threat_report.pdf')
+        generate_pdf_report(
+            scored_iocs=scored_iocs,
+            stix_parser=stix_parser,
+            enrichment_summary=enrichment_summary,
+            risk_summary=risk_summary,
+            output_path=pdf_path,
+            graph_png_path=graph_png if os.path.exists(graph_png) else None
+        )
+        print(f"   [+] PDF report saved: {pdf_path}")
 
     # ── Step 6: Hunt Queries ─────────────────────────────────────────
     if not args.no_queries:
